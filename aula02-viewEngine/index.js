@@ -14,7 +14,7 @@ app.get("/", (req, res) => {
 // Rota perfil
 // :nome é um parametro obrigatorio
 // para o parametro se tornar opcional é só adicionar uma ? no final
-app.get("/perfil", (req, res) => {
+app.get("/perfil/:nome?", (req, res) => {
   res.render("perfil");
 });
 
@@ -23,23 +23,52 @@ app.get("/videos", (req, res) => {
   res.render("videos");
 });
 
+// ROTA DE PRODUTOS
 app.get("/produtos/:produto?", (req, res) => {
-  const listaProdutos = ['computador', 'tablet', 'celular', 'notebook']
+  const listaProdutos = ["computador", "tablet", "celular", "notebook"];
 
   const produto = req.params.produto;
   //passar var para a pagina
-  res.render("produtos",{
-    /* variavel que esta na pagina */produto : produto,/* variavel que esta no index */
-    listaProdutos : listaProdutos
+  res.render("produtos", {
+    /* variavel que esta na pagina */ produto:
+      produto /* variavel que esta no index */,
+    listaProdutos: listaProdutos,
     /* na pagina produtos.ejs haverá uma testagem de condição (if) */
   });
 });
 
+//ROTA DE PEDIDOS
+app.get("/pedidos", (req, res) => {
+  // array de objetos com os pedidos
+  const pedidos = [
+    {
+      produto: "Celular",
+      valor: 3000,
+    },
+    {
+      produto: "Computador",
+      valor: 4000,
+    },
+    {
+      produto: "Tablet",
+      valor: 2000,
+    },
+    {
+      produto: "Notebook",
+      valor: 3800,
+    }
+  ];
+  res.render("pedidos", {
+    pedidos: pedidos
+  });
+});
+
 // Iniciando o servidor na porta 8080
-app.listen(8080, (error) => {
+const port = 8080;
+app.listen(port, (error) => {
   if (error) {
     console.log(`Ocorreu um erro: ${error}`);
   } else {
-    console.log(`Servidor iniciado`);
+    console.log(`Servidor iniciado em: http://localhost:${port}`);
   }
 });
