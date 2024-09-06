@@ -15,23 +15,31 @@ app.get("/", (req, res) => {
 // :nome é um parametro obrigatorio
 // para o parametro se tornar opcional é só adicionar uma ? no final
 app.get("/perfil/:nome?", (req, res) => {
-  res.render("perfil");
+  const nome = req.params.nome;
+  res.render("perfil", {
+    nome: nome
+  }); //usa a funcao render para mandar a pagina perfil para o EJS renderizar, nesse caso não precisa de extensão 
+  
 });
 
 // Rota de video
-app.get("/videos", (req, res) => {
-  res.render("videos");
+app.get("/videos/:playlist?/:video?", (req, res) => {
+  const playlist = req.params.playlist;
+  const video = req.params.video;
+  res.render("videos", {
+    playlist:playlist,
+    video:video
+  });
 });
 
 // ROTA DE PRODUTOS
 app.get("/produtos/:produto?", (req, res) => {
   const listaProdutos = ["computador", "tablet", "celular", "notebook"];
 
-  const produto = req.params.produto;
+  const produto = req.params.produto; //pega o produto que esta como parametro
   //passar var para a pagina
   res.render("produtos", {
-    /* variavel que esta na pagina */ produto:
-      produto /* variavel que esta no index */,
+    /* variavel que esta na pagina -> */ produto: produto /* <- variavel que esta no index */,
     listaProdutos: listaProdutos,
     /* na pagina produtos.ejs haverá uma testagem de condição (if) */
   });

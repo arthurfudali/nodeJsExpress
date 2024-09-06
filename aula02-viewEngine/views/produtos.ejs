@@ -7,17 +7,16 @@
   </head>
   <body>
     <h1>conheca os produtos</h1>
-    <hr />
+    <hr/>
     <!-- tags ejs chamando a variavel que veio do index -->
     <%= produto %>
     <!-- condição para verificar se o produto foi passado: -->
     <!-- o codigo JS dentro do html deve ser colocado dentro da tag do EJS, como no PHP ou como no JINJA -->
     <!-- a tag EJS só precisa do sinal de = caso seja para informar uma variavel, para um codigo JS não -->
 
-    <% if(!produto){ %>
-    <!-- caso o produto for FALSO (nao existr) -->
+       <!-- caso o produto for FALSO (nao existr) -->
     <!-- CODIGO HTML AQUI -->
-    <%= listaProdutos%>
+    
         
 
     <% if(!produto){ %> 
@@ -30,7 +29,7 @@
 
         <%})%>
     <% } %>
-    <% } %>
+
     <p></p>
   </body>
 </html>
