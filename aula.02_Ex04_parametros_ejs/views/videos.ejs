@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=h1, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <% if (!playlist && !video){ %>
+    <h1>VIDEO</h1>
+    <hr>
+    <h3>
+        VIDEOS
+    </h3>
+    <% }else if(!video){ %>
+        <h1>Você está na playlist de videos: <%= playlist %> </h1>
+    <% } else{ %>
+        <h1>Assistindo: <%= video%> da playlist: <%= playlist%> </h1>
+    <%}%>
+
+    <p>
+        Essa pagina esta sendo renderizada com o EJS no express
+    </p>
+</body>
+</html>
