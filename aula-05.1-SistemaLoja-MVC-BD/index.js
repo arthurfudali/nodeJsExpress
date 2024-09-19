@@ -2,10 +2,28 @@
 import express from 'express'
 // Iniciando o Express na variável app
 const app = express()
+// Importando o Sequelize com os dados da conexão
+import connection from './config/sequelize-config.js'
 // Importando os Controllers (onde estão as rotas) 
 import ClientesController from "./controllers/ClientesController.js" 
 import ProdutosController from "./controllers/ProdutosController.js" 
 import PedidosController from "./controllers/PedidosController.js" 
+
+// Realizando a conexão com o banco de dados
+connection.authenticate().then(() => {
+    console.log("Conexão com o BD feita com sucesso!");
+}).catch((error) => {
+    console.log(error);
+})
+
+// Criando o banco de dados se ele não existir:
+connection.query(`CREATE DATABASE IF NOT EXISTS loja`).then(()=>{
+    console.log("Banco de dados está criado!");
+}).catch((error)=>{
+    console.log(error);
+})
+
+
 // Define o EJS como Renderizador de páginas
 app.set('view engine', 'ejs')
 // Define o uso da pasta "public" para uso de arquivos estáticos
