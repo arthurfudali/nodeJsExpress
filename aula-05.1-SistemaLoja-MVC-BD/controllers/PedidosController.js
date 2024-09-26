@@ -1,17 +1,36 @@
-import express from 'express'
-const router = express.Router()
+import express from "express";
+import Pedido from "../models/Pedido.js";
+const router = express.Router();
 
 // ROTA PEDIDOS
-router.get("/pedidos",function(req,res){
-    const pedidos = [
-        {numero: "983721931", valor: 1200},
-        {numero: "983721932", valor: 900},
-        {numero: "983721933", valor: 3200},
-        {numero: "983721934", valor: 150}
-    ]
+
+router.get("/pedidos", (req, res) => {
+  Pedido.findAll().then((pedidos) => {
     res.render("pedidos", {
-        pedidos: pedidos
+      pedidos: pedidos,
+    });
+  });
+});
+
+router.post("/pedidos/new", (req,res)=>{
+    const numero =req.body.numero;
+    const valor =req.body.valor;
+    Pedido.create({
+        numero:numero,
+        valor:valor
+    }).then(()=>{
+        res.redirect("/pedidos")
     })
 })
 
-export default router
+router.get("pedidos/delete/:id", (req,res)=>{
+    const id = req.params.id;
+    Pedido.destroy({
+        where:{
+            id:id
+        }
+    }).then(()=>{
+        res.redirect("/pedidos")
+    })
+})
+export default router;

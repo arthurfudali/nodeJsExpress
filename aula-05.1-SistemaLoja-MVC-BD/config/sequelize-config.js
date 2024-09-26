@@ -6,7 +6,7 @@ const connection = new Sequelize({
     username:'root',
     password:'',
     // a linha 'database' é comentada so na primeira execução da aplicação pois o banco ainda nao esta criado
-    // database: 'loja', 
+    database: 'loja', 
     timezone: '-03:00'
 })
 export default connection;
