@@ -23,7 +23,7 @@ router.post("/pedidos/new", (req,res)=>{
     })
 })
 
-router.get("pedidos/delete/:id", (req,res)=>{
+router.get("/pedidos/delete/:id", (req,res)=>{
     const id = req.params.id;
     Pedido.destroy({
         where:{

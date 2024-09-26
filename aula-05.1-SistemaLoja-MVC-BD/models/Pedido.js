@@ -3,11 +3,11 @@ import connection from "../config/sequelize-config.js";
 
 const Pedido = connection.define('pedidos', {
     numero: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING,// alterar pra INTEGER depois
         allowNull: false
     },
     valor: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.INTEGER, // alterar para FLOAT
         allowNull: false
     }
 });
