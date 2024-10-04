@@ -47,8 +47,8 @@
             <td><%= cliente.nome %></td>
             <td><%= cliente.cpf %></td>
             <td><%= cliente.endereco %></td>
-            <td><a style="color: orange;" href="">Editar</a> </td>
-            <td><a style="color: red;" href="/clientes/delete/<%=cliente.id%>">Deletar</a></td>
+            <td><a style="color: orange;" href="/clientes/edit/<%=cliente.id%>" >Editar</a> </td>
+            <td><a style="color: red;" href="/clientes/delete/<%=cliente.id%>" onclick="return confirm('Deseja realmente deletar o cliente <%=cliente.nome%>?')"> Deletar</a></td>
           </tr>
           <% }) %>
         </tbody>

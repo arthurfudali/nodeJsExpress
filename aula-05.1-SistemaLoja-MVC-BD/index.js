@@ -26,7 +26,6 @@ connection.query(`CREATE DATABASE IF NOT EXISTS loja`).then(()=>{
     console.log(error);
 })
 
-
 // Define o EJS como Renderizador de páginas
 app.set('view engine', 'ejs')
 // Define o uso da pasta "public" para uso de arquivos estáticos
