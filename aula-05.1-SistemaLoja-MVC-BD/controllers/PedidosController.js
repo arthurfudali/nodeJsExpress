@@ -36,11 +36,11 @@ router.get("/pedidos/delete/:id", (req,res)=>{
 
 router.get("/pedidos/edit/:id", (req,res) =>{
     const id = req.params.id;
-    Cliente.findByPk(id).then((pedido) =>{
+    Pedido.findByPk(id).then((pedido) =>{
         res.render("pedidoEdit", {
             pedido: pedido,
         })
-    }).cathc((error)=>{
+    }).catch((error)=>{
         console.log(error);
     });
 });
@@ -55,8 +55,8 @@ router.post("/pedidos/update", (req,res) =>{
             valor: valor
         }, {where: {id:id}}
     ).then(()=>{
-        res.redirect("/produtos")
-    }).cathc((error)=>{
+        res.redirect("/pedidos")
+    }).catch((error)=>{
         console.log(error);
     });
 })
