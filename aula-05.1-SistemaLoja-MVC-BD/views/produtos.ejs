@@ -70,7 +70,7 @@
               currency: 'BRL'}) %>
             </td>
             <td><%= produto.categoria %></td>
-            <td><a style="color: orange" href="">Editar</a></td>
+            <td><a style="color: orange" href="/produtos/edit/<%=produto.id%>">Editar</a></td>
             <td>
               <a style="color: red" href="/produtos/delete/<%=produto.id%>"
                 >Deletar</a
@@ -83,5 +83,6 @@
     </div>
   </div>
 </div>
+
 
 <%- include ('partials/footer.ejs') %>
