@@ -3,8 +3,11 @@ const router = express.Router();
 // importando o model de Cliente
 import Cliente from "../models/Cliente.js";
 
+// importando o middlware auth
+import Auth from "../middleware/Auth.js";
+
 // ROTA CLIENTES
-router.get("/clientes", function (req, res) {
+router.get("/clientes", Auth, function (req, res) {
   Cliente.findAll().then((clientes) => {
     res.render("clientes", {
       clientes: clientes,
@@ -13,7 +16,7 @@ router.get("/clientes", function (req, res) {
 });
 
 // ROTA DE CADASTRO DE CLIENTES
-router.post("/clientes/new", function (req, res) {
+router.post("/clientes/new", Auth, function (req, res) {
   // Recebendo os dados do form e gravando nas variaveis
   const nome = req.body.nome; //nome nesse caso é o 'name' do formulario
   const cpf = req.body.cpf;
@@ -34,7 +37,7 @@ router.post("/clientes/new", function (req, res) {
 
 // ROTA DE DELETE
 // Recebe o ID como parametro
-router.get("/clientes/delete/:id", function (req, res) {
+router.get("/clientes/delete/:id", Auth, function (req, res) {
   // Coletar o id que veio na URL
   const id = req.params.id;
   // exclusão
@@ -52,24 +55,26 @@ router.get("/clientes/delete/:id", function (req, res) {
 });
 
 // ROTA DE EDICAO
-router.get("/clientes/edit/:id", (req,res) => {
+router.get("/clientes/edit/:id", Auth, (req, res) => {
   const id = req.params.id;
-  Cliente.findByPk(id).then((cliente) => {
-    res.render("clienteEdit",{
-      cliente: cliente,
+  Cliente.findByPk(id)
+    .then((cliente) => {
+      res.render("clienteEdit", {
+        cliente: cliente,
+      });
+    })
+    .catch((error) => {
+      console.log(error);
     });
-  }).catch((error) => {
-    console.log(error);
-  });
 });
 
 // ROTA DE ALTERACAO
-router.post("/clientes/update", (req,res) => {
+router.post("/clientes/update", Auth, (req, res) => {
   /* o ID vem pelo corpo do formulario, não pela rota */
   const id = req.body.id;
   const nome = req.body.nome;
-  const cpf= req.body.cpf;
-  const endereco= req.body.endereco;
+  const cpf = req.body.cpf;
+  const endereco = req.body.endereco;
   Cliente.update(
     {
       nome: nome,
@@ -77,12 +82,13 @@ router.post("/clientes/update", (req,res) => {
       endereco: endereco,
       /* as colunas da esquerda são as colunas do BD, as colunas da direita são as variaveis */
     },
-    {where: {id: id}}
-  ).then(()=>{
-    res.redirect("/clientes");
-  }).catch((error)=>{
-    console.log(error);
-  })
-
-})
+    { where: { id: id } }
+  )
+    .then(() => {
+      res.redirect("/clientes");
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
 export default router;

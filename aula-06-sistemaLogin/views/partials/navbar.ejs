@@ -13,5 +13,16 @@
             <a class="nav-link" href="/pedidos">Pedidos</a>
         </li>
     </ul>
+    <span style="margin-left:auto;">
+        <ul class="navbar-nav me-3">
+            <li class="nav-item">
+                <% if(typeof loggedOut === "undefined"){ %>
+                    <a href="/logout" class="nav-link"> Fazer Logout </a>
+                <%} else { %>
+                    <a href="/login" class="nav-link"> Fazer Login </a>
+                <%}%>
+            </li>
+        </ul>
+    </span>
 </nav>
 <br>

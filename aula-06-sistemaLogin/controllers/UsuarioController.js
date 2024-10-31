@@ -4,10 +4,23 @@ import bcrypt from "bcrypt";
 const router = express.Router();
 
 router.get("/login", (req, res) => {
-  res.render("login");
+  res.render("login",{
+    loggedOut: true,
+    messages: req.flash()
+  });
 });
+
+// Rota de logout
+router.get("/logout", (req,res)=>{
+  req.session.usuario = undefined; //limpa a sessão
+  res.redirect("/");
+})
+
 router.get("/cadastro", (req, res) => {
-  res.render("cadastro");
+  res.render("cadastro",{
+    loggedOut: true,
+    messages: req.flash()
+  });
 });
 router.post("/createUser", (req, res) => {
   const { email, senha } = req.body;
@@ -25,7 +38,8 @@ router.post("/createUser", (req, res) => {
         res.redirect("/login");
       });
     }else{ //caso o usuario ja esteja cadastrado
-        res.send( `Usuario já cadastrado. <br> <a href='/login'> Faça o login!</a>`)
+        req.flash('danger', `Usuario já cadastrado. Faça o login!`)
+        res.redirect("/cadastro")
     }
   });
 });
@@ -46,14 +60,22 @@ router.post("/authenticate", (req, res) => {
         // se a senha for válida
         if(correct){
             //autoriza o login
-            res.redirect("/");
+            
+            req.session.usuario ={
+              id: usuario.id,
+              email: usuario.email
+            }
+            // res.send(`Usuario logado: <br> ID: ${req.session.usuario['id']} <br> email: ${req.session.usuario['email']}`)
+              // enviar mensagem de sucesso
+              req.flash('success', "Login efetuado com sucesso!");
+              res.redirect("/");
         }else{ // caso a senha esteja errada
-            res.send(`Senha inválida!<br><a href='/login'>Tente novamente.</a>`)
+            req.flash('danger', `Senha inválida! Tente novamente.`);
+            res.redirect("/login");
         }
     } else {
-      res.send(
-        `Usuario não cadastrado. <br> <a href='/cadastro'> Tente novamente!</a>`
-      );
+      req.flash('danger', `Usuario não cadastrado. Tente novamente!`);
+      res.redirect("/login")
     }
   });
 });
