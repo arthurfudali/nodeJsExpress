@@ -7,13 +7,26 @@
     <title>Upload</title>
 </head>
 <body>
-    <h1>upload de arquivo</h1>
-<!--     <form action="/upload" method="post" enctype="multipart/form-data">
-        <input type="file" name="file" id="">
-        <input type="submit" value="Enviar">
-    </form>
-    <img src="uploads/e22f9809e5c486b6ab8c41b859dc381d" alt=""> -->
-    
+
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-header text-center">
+                <h1>Galeria de fotos</h1>
+
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 m-auto">
+                        <img src="uploads/e22f9809e5c486b6ab8c41b859dc381d" alt="" class="img-thumbnail" > 
+                    </div>
+                </div>
+            </div>
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" id="" class="form-control" required>
+                <input type="submit" value="Enviar" class="btn btn-success w-100">
+            </form>
+        </div>
+    </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </html>
