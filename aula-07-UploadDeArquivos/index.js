@@ -2,6 +2,7 @@ import express from "express";
 import multer from "multer";
 const app = express();
 import connection from "./config/sequelize-config.js";
+import Galeria from "./models/Galeria.js";
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
