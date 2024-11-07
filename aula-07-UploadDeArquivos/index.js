@@ -25,6 +25,10 @@ app.get("/", (req,res)=>{
 });
 
 app.post("/upload", upload.single("file"), (req,res)=>{
+    const file = req.file.filename;
+    Galeria.create({
+        file: file
+    });
     res.redirect("/");
 });
 
