@@ -21,7 +21,11 @@ connection.query(`CREATE DATABASE IF NOT EXISTS galeria`).then(()=>{
 
 const upload = multer({dest: "public/uploads/"});
 app.get("/", (req,res)=>{
-    res.render("index");
+    Galeria.findAll().then((imagens) => {
+        res.render("index", {
+            imagens:imagens
+        });
+    })
 });
 
 app.post("/upload", upload.single("file"), (req,res)=>{
